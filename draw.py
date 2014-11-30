@@ -1,33 +1,40 @@
-import sfml
+#import sfml
 import sphere
+import numpy
 
-WIDTH = 240
-HEIGHT = 120
+WIDTH = 16
+HEIGHT = 16
 
 SIZE = 4.7
 
-screen = sfml.VertexArray(sfml.PrimitiveType.POINTS, WIDTH*HEIGHT)
+#screen = sfml.VertexArray(sfml.PrimitiveType.POINTS, WIDTH*HEIGHT)
 
-TRIANGLE = ((0,1,120),(1,1,120),(1,1,120))
+screen = [[0 for x in range(HEIGHT)] for y in range(WIDTH)]
+
+
+TRIANGLE = ((10,11,120),(11,10,120),(11,11,120))
 
 
 for i in range(WIDTH*HEIGHT):
-	color = sfml.Color.RED
+	color = 0
 	scrx = i%WIDTH
-	scry = (i-scrx)/WIDTH
+	scry = int((i-scrx)/WIDTH)
 	
 	
-	point = (-(scrx-(WIDTH>>1)),-(scry-(HEIGHT>>1)),120)
+	point = (-(scrx-(WIDTH>>1)),-(scry-(HEIGHT>>1)),-120)
 	
-	print(point)
+	#print(point)
 	
 	if sphere.ray_hits_triangle(point,TRIANGLE):
-		color = sfml.Color.BLUE
+		color = 1
+
 	
-	screen.__setitem__(i, sfml.Vertex(sfml.Vector2(scrx,scry), color))
+	#screen.__setitem__(i, sfml.Vertex(sfml.Vector2(scrx,scry), color))
+	screen[int(scrx)][int(scry)] = color
 
-
-
+for i in range(WIDTH):
+	print(screen[i])
+	print()
 
 """
 for i in range(WIDTH*HEIGHT):
@@ -58,7 +65,7 @@ for i in range(WIDTH*HEIGHT):
 	
 	screen.__setitem__(i, sfml.Vertex(sfml.Vector2(scrx,scry), sfml.Color.RED, sfml.Vector2(scrx,scry)))
 """
-
+"""
 window = sfml.RenderWindow(sfml.VideoMode(WIDTH, HEIGHT), "pySFML Window")
 
 while window.is_open:
@@ -71,3 +78,4 @@ while window.is_open:
 	window.clear() # clear screen
 	window.draw(screen)
 	window.display() # update the window
+"""
