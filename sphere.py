@@ -4,20 +4,16 @@
 def isInTriangle(x,y,x1,y1,x2,y2,x3,y3):
 	
 	
-	det = (y2-y3)*(x1-x3)+(x3-x2)*(y1-y3)
-	detPositive = det > 0
+	sqx1 = x1*x1
+	sqx2 = x2*x2
+	sqx3 = x3*x3
 	
-	l1nodet = (y2-y3)*(x-x3)+(x3-x2)*(y-y3)
-	l2nodet = (y3-y1)*(x-x3)+(x1-x3)*(y-y3)
-	l3nodet = det - l1nodet - l2nodet
+	sqy1 = y1*y1
+	sqy2 = y2*y2
+	sqy3 = y3*y3
 	
-	
-	l1Pos = l1nodet >= 0
-	l2Pos = l2nodet >= 0
-	l3Pos = l3nodet >= 0
-	
-	
-	return (l1Pos == l2Pos == l3Pos == detPositive)
+	return sqx1+sqy1 > x*x+y*y
+
 
 
 
